@@ -9,5 +9,7 @@
   :serial t
   :components ((:file "package")
                (:file "utils")
-               (:file "editor")
-               (:file "buffer")))
+               (:file "keys")
+               (:file "render")
+               (:file "buffer")
+               (:file "editor")))

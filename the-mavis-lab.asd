@@ -8,4 +8,6 @@
   :depends-on (:clog)
   :serial t
   :components ((:file "package")
-               (:file "editor")))
+               (:file "utils")
+               (:file "editor")
+               (:file "buffer")))

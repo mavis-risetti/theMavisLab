@@ -43,15 +43,16 @@
    ("\"" "&quot;")
    ("'" "&#39;")))
 
-(defun insert-char (c buffer)
-  (let ((char (cond
-                ((escaped-char-p c) (escape-char c))
-                (t c))))
-    (add-char char buffer)))
+;; (defun insert-char (c buffer)
+  ;; (let ((char (cond
+                ;; ((escaped-char-p c) (escape-char c))
+                ;; (t c))))
+    ;; (add-char-to-last-line char buffer)))
 
 (defun key-handler (event-data buffer)
   (let* ((key (getf event-data :key))
          (len (length key)))
     (print key)
-    (cond ((and (= len 1) (char-p key)) (insert-char key buffer))
+    (cond ((and (= len 1) (char-p key)) (add-char-to-last-line key buffer))
+          ((string= key "Enter") (add-new-line "" buffer))
           (t (print "Not a Character")))))

@@ -7,6 +7,10 @@
 (defun concat (&rest strings)
   (apply #'concatenate `(string ,@strings)))
 
+(defmacro aif (aif-cond &body aif-body)
+  `(let ((it ,aif-cond))
+     (if it ,@aif-body)))
+
 (defmacro while (while-condition &body while-body)
   `(do ()
        ((not ,while-condition) t)

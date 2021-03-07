@@ -1,14 +1,18 @@
 (in-package :the-mavis-lab)
 
+(defparameter *body* nil)
+
 (defun init-editor (body)
   "initialize the editor"
-  (let ((editor (create-div body :class "editor"))
+  (setf *body* body)
+  (let* ((editor (create-div body :class "editor"))
+        (pre (create-child editor "<pre></pre>" ))
         (buf (make-buf)))
     (set-on-key-down (html-document body)
                      #'(lambda (obj event-data)
                          (declare (ignore obj))
                          (key-handler event-data buf)
-                         (render editor buf)))
+                         (render pre buf)))
     ;; To keep the thread running
     (run body)))
 

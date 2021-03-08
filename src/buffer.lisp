@@ -15,7 +15,7 @@
     :initform nil
     :accessor changed-lines)
    (line-objects
-    :initform (make-hash-table)
+    :initform nil
     :accessor line-objects)))
 
 (defun make-buf (root-el)
@@ -38,14 +38,12 @@
         (add-changed-line n buffer))
       (elt (contents buffer) (1- n))))
 
-;; (defun insert-char (c line col buffer)
-  ;; (let* (
-  ;; )
-    ;; (setf line (clip 1 line (get-buffer-length buffer))
-          ;; col (clip 1 col (1+ len)))
-    ;; (format t "~%s is ~A~%" (insert c (1- col) s))
-    ;; (nth-line line buffer :line (insert c col s))
-    ;; (add-changed-line line buffer)))
+(defun nth-object (n buffer &key (html nil))
+  "get object or set inner-html"
+  (if html
+      (setf (inner-html (elt (line-objects buffer) (1- n)))
+            html)
+      (elt (line-objects buffer) (1- n))))
 
 (defun insert-at-point (s buffer)
   (let* ((cursor (cursor buffer))
@@ -57,22 +55,38 @@
 
 (defun remove-line (line buffer)
   ;; remove from the screen first
-  (remove-from-dom (gethash line (line-objects buffer)))
+  (remove-from-dom (nth-object line buffer))
   ;; remove from the line-objects now
-  (remhash line (line-objects buffer))
+  (delete-item (1- line) (line-objects buffer))
   ;; remove from buffer contents
   (setf (contents buffer) (delete-item (1- line) (contents buffer))))
 
+(defun add-line (line buffer &key (line-contents ""))
+  "adds an empty line at 'line', pushing all the lines"
+  ;; add to buffer contents
+  (setf (contents buffer) (add-item (1- line) line-contents (contents buffer)))
+  ;; add to line objects, screen
+  (setf (line-objects buffer) (add-item (1- line)
+                                        (if (= line 1)
+                                            (place-before
+                                             (elt (line-objects buffer) 0)
+                                             (create-div *ed*
+                                                         :content line-contents
+                                                         :class "line"))
+                                            (place-after
+                                             (elt (line-objects buffer) (- line 2))
+                                             (create-div *ed*
+                                                         :content line-contents
+                                                         :class "line")))
+                                        (line-objects buffer)))
+  ;; adjust cursor
+  (cursor->down buffer)
+  (cursor->bol buffer)
+  ;; track change
+  (add-changed-line line buffer))
+
 (defun get-buffer-length (buffer)
   (length (contents buffer)))
-
-(defun add-char-to-last-line (c buffer)
-  (let* ((last-line (get-buffer-length buffer))
-         (last-col (length (nth-line last-line buffer))))
-    (insert-char c
-                 (clip 1 last-line last-line)
-                 (clip 1  last-col last-col)
-                 buffer)))
 
 (defun add-new-line (contents buffer)
   "add a new line to buffer"

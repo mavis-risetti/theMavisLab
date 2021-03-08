@@ -23,3 +23,15 @@
       (remove-line line buffer)
       ;; track the change
       (add-changed-line (1- line) buffer))))
+
+(defun add-new-line-at-point (buffer)
+  (let* ((cursor (cursor buffer))
+         (line (line cursor))
+         (col (col cursor))
+         (contents (nth-line line buffer))
+         (before-cursor (subseq contents 0 (1- col)))
+         (after-cursor (subseq contents (1- col))))
+    ;; change the current line first
+    (nth-line line buffer :line before-cursor)
+    ;; create a new line in buffer, objects and screen
+    (add-line (1+ line) buffer :line-contents after-cursor)))

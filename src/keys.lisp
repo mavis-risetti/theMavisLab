@@ -47,7 +47,7 @@
   (let* ((key (getf event-data :key))
          (len (length key)))
     (cond ((and (= len 1) (char-p key)) (insert-at-point key buffer))
-          ((string= key "Enter") (add-new-line "" buffer))
+          ((string= key "Enter") (add-new-line-at-point buffer))
           ((string= key "ArrowRight") (cursor->right buffer))
           ((string= key "ArrowLeft") (cursor->left buffer))
           ((string= key "ArrowUp") (cursor->up buffer))

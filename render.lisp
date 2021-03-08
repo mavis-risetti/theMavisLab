@@ -2,7 +2,6 @@
 
 (defun render (editor buffer)
   "render the screen"
-  (format t "~%BUFFER: ~A~%" (lines buffer))
   (mapcar (lambda (n)
             (let ((line (nth-line n buffer)))
               (aif (gethash n (line-objects buffer))

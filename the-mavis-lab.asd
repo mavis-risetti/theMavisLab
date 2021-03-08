@@ -11,5 +11,6 @@
                (:file "utils")
                (:file "keys")
                (:file "render")
+               (:file "cursor")
                (:file "buffer")
                (:file "editor")))

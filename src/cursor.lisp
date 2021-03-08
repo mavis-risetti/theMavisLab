@@ -39,6 +39,11 @@
     (setf (col cursor) col)
     p))
 
+(defun cursor->last-char (buffer)
+  (let* ((last-line (length (lines buffer)))
+         (last-col (length (nth-line last-line buffer))))
+    (move-cursor last-line last-col buffer)))
+
 (defun clip (min-value n max-value)
   (max (min n max-value) min-value))
 

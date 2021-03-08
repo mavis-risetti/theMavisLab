@@ -7,10 +7,10 @@
   :author "mavis-risetti"
   :depends-on (:clog)
   :serial t
-  :components ((:file "package")
-               (:file "utils")
-               (:file "keys")
-               (:file "render")
-               (:file "cursor")
-               (:file "buffer")
-               (:file "editor")))
+  :components ((:file "src/package")
+               (:file "src/utils")
+               (:file "src/keys")
+               (:file "src/render")
+               (:file "src/cursor")
+               (:file "src/buffer")
+               (:file "src/editor")))

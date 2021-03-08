@@ -21,10 +21,14 @@
 (defun make-buf (root-el)
   (let ((buf (make-instance 'buffer :root root-el)))
     (setf (slot-value buf 'cursor) (make-cursor (root buf)))
+    (add-changed-line 1 buf)
     buf))
 
 (defun add-changed-line (line-num buffer)
   (pushnew line-num (changed-lines buffer)))
+
+(defun empty-changed-lines (buffer)
+  (setf (changed-lines buffer) nil))
 
 (defun nth-line (n buffer &key (contents nil))
   "get or set nth line"
@@ -39,12 +43,13 @@
   (let ((len (length (lines buffer)))
         (last-line (last1 (lines buffer))))
     (nth-line len buffer :contents (concat last-line c))
-    (add-changed-line len buffer)
-    (move-cursor len (+ (length last-line) (length c) 1) buffer)))
+    (cursor->last-char buffer)
+    (add-changed-line len buffer)))
 
 (defun add-new-line (contents buffer)
   "add a new line to buffer"
   (let ((len (length (lines buffer))))
     (setf (lines buffer)
           `(,@(lines buffer) ,contents))
-    (add-changed-line len buffer)))
+    (cursor->last-char buffer)
+    (add-changed-line (1+ len) buffer)))

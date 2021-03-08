@@ -7,5 +7,8 @@
               (aif (gethash n (line-objects buffer))
                 (setf (inner-html it) line)
                 (setf (gethash n (line-objects buffer))
-                      (create-div editor :content line)))))
-          (changed-lines buffer)))
+                      (create-div editor
+                                  :content line
+                                  :class (format nil "line line-~A" n))))))
+          (changed-lines buffer))
+  (empty-changed-lines buffer))

@@ -37,7 +37,7 @@
 
 (defun init-editor (body)
   "initialize the editor"
-  (load-css (html-document body) "/lab.css")
+  (load-css (html-document body) "/labs.css")
   (setf *body* body)
   (let* ((editor-div (create-div body :class "editor"))
          (editor-pre (create-child editor-div "<pre></pre>" ))
@@ -53,6 +53,7 @@
                          (declare (ignore obj))
                          (key-handler event-data buf)
                          (render editor-pre buf)))
+    (render editor-pre buf)
     ;; To keep the thread running
     (run body)))
 
@@ -60,6 +61,6 @@
   "start the editor"
   ;; Make 'init-editor' entry point for the application
   (initialize #'init-editor)
-  (open-browser))
+  (uiop:launch-program "cd ~/common-lisp/theMavisLab;npm start"))
 
 (start-lab)

@@ -1,0 +1,20 @@
+{
+  "name": "the-mavis-lab",
+  "version": "0.1.0",
+  "description": "A Home To Mavis's Experiments...",
+  "main": "./app/main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "https://github.com/mavis-risetti/theMavisLab.git",
+  "keywords": [
+    "emacs",
+    "common-lisp",
+    "editor"
+  ],
+  "author": "mavis-risetti",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "^11.3.0"
+  }
+}

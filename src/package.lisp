@@ -1,4 +1,4 @@
 ;; package.lisp
 
 (defpackage :the-mavis-lab
-  (:use :cl :clog))
+  (:use :cl :clog :str))

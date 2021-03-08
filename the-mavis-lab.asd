@@ -5,7 +5,7 @@
   :version "0.1"
   :description "A Home for my Experiments"
   :author "mavis-risetti"
-  :depends-on (:clog)
+  :depends-on (:clog :str)
   :serial t
   :components ((:file "src/package")
                (:file "src/utils")

@@ -3,7 +3,8 @@
 (defparameter *body* nil)
 (defparameter *char-width* nil)
 (defparameter *line-height* nil)
-(defparameter edi nil)
+(defparameter *buf* nil)
+(defparameter *ed* nil)
 
 (defun get-line-height (el)
   "line' on screen height"
@@ -42,7 +43,8 @@
   (let* ((editor-div (create-div body :class "editor"))
          (editor-pre (create-child editor-div "<pre></pre>" ))
          (buf (make-buf editor-pre)))
-    (setf edi editor-pre)
+    (setf *buf* buf)
+    (setf *ed* editor-pre)
     (setf *char-width* (get-char-width editor-pre))
     (setf *line-height* (get-line-height editor-pre))
     ;; let the cursor blink
@@ -54,6 +56,7 @@
                          (key-handler event-data buf)
                          (render editor-pre buf)))
     (render editor-pre buf)
+    (render-cursor buf)
     ;; To keep the thread running
     (run body)))
 

@@ -45,13 +45,14 @@
 
 (defun key-handler (event-data buffer)
   (let* ((key (getf event-data :key))
-         (len (length key))
-         (cur-line (line (cursor buffer)))
-         (cur-col (col (cursor buffer))))
-    (cond ((and (= len 1) (char-p key)) (add-char-to-last-line key buffer))
+         (len (length key)))
+    (cond ((and (= len 1) (char-p key)) (insert-at-point key buffer))
           ((string= key "Enter") (add-new-line "" buffer))
-          ((string= key "ArrowRight") (move-cursor cur-line (1+ cur-col) buffer))
-          ((string= key "ArrowLeft") (move-cursor cur-line (1- cur-col) buffer))
-          ((string= key "ArrowUp") (move-cursor (1- cur-line) cur-col buffer))
-          ((string= key "ArrowDown") (move-cursor (1+ cur-line) cur-col buffer))
+          ((string= key "ArrowRight") (cursor->right buffer))
+          ((string= key "ArrowLeft") (cursor->left buffer))
+          ((string= key "ArrowUp") (cursor->up buffer))
+          ((string= key "ArrowDown") (cursor->down buffer))
+          ((string= key "Backspace") (delete-char-before-point buffer))
           (t "unused key"))))
+
+

@@ -41,7 +41,7 @@
 
 (defun cursor->last-char (buffer)
   (let* ((last-line (length (lines buffer)))
-         (last-col (length (nth-line last-line buffer))))
+         (last-col (1+ (length (nth-line last-line buffer)))))
     (move-cursor last-line last-col buffer)))
 
 (defun clip (min-value n max-value)

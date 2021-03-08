@@ -3,6 +3,7 @@
 (defparameter *body* nil)
 (defparameter *char-width* nil)
 (defparameter *line-height* nil)
+(defparameter edi nil)
 
 (defun get-line-height (el)
   "line' on screen height"
@@ -36,12 +37,17 @@
 
 (defun init-editor (body)
   "initialize the editor"
+  (load-css (html-document body) "/lab.css")
   (setf *body* body)
   (let* ((editor-div (create-div body :class "editor"))
          (editor-pre (create-child editor-div "<pre></pre>" ))
          (buf (make-buf editor-pre)))
+    (setf edi editor-pre)
     (setf *char-width* (get-char-width editor-pre))
     (setf *line-height* (get-line-height editor-pre))
+    ;; let the cursor blink
+    (setf (style (el (cursor buf)) "animation")
+          "blink-animation 1s steps(5, start) infinite")
     (set-on-key-down (html-document body)
                      #'(lambda (obj event-data)
                          (declare (ignore obj))

@@ -40,7 +40,7 @@
         (last-line (last1 (lines buffer))))
     (nth-line len buffer :contents (concat last-line c))
     (add-changed-line len buffer)
-    (move-cursor len (length last-line) (cursor buffer))))
+    (move-cursor len (+ (length last-line) (length c) 1) buffer)))
 
 (defun add-new-line (contents buffer)
   "add a new line to buffer"

@@ -9,15 +9,13 @@
 (defun get-line-height (el)
   "line' on screen height"
   (let* ((content "MadhuVamsi")
-         (len (length content))
          (span (create-span el :content content))
          (height))
     (setf (style span "height") "auto")
     (setf (style span "width") "auto")
     (setf (style span "position") "absolute")
     (setf (style span "white-space") "no-wrap")
-    (setf height (/ (client-height span)
-                   (coerce len 'single-float)))
+    (setf height (client-height span))
     (remove-from-dom span)
     height))
 
@@ -31,6 +29,7 @@
     (setf (style span "width") "auto")
     (setf (style span "position") "absolute")
     (setf (style span "white-space") "no-wrap")
+    (setf (style span "display") "inline-block")
     (setf width (/ (client-width span)
                    (coerce len 'single-float)))
     (remove-from-dom span)
@@ -38,15 +37,16 @@
 
 (defun init-editor (body)
   "initialize the editor"
-  (load-css (html-document body) "/labs.css")
+  (load-css (html-document body) "/lab.css")
   (setf *body* body)
   (let* ((editor-div (create-div body :class "editor"))
          (editor-pre (create-child editor-div "<pre></pre>" ))
          (buf (make-buf editor-pre)))
     (setf *buf* buf)
     (setf *ed* editor-pre)
+    (setf *line-height* (get-line-height editor-pre))    
+    (sleep 1)
     (setf *char-width* (get-char-width editor-pre))
-    (setf *line-height* (get-line-height editor-pre))
     ;; let the cursor blink
     (setf (style (el (cursor buf)) "animation")
           "blink-animation 1s steps(5, start) infinite")

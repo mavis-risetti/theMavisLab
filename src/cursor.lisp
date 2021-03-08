@@ -32,8 +32,7 @@
         (p (clip-pos line col buffer)))
     (setf line (first p)
           col (second p))
-    (setf (style (el cursor) "top") (format nil "~Apx" (* (* *line-height* 10)
-                                                          (+ line 0)))
+    (setf (style (el cursor) "top") (format nil "~Apx" (* *line-height* line))
           (style (el cursor) "left") (format nil "~Apx" (* *char-width* col)))
     (set-cursor line col buffer)))
 

@@ -8,7 +8,23 @@
     (cursor->right)
     (add-changed-line line)))
 
-(defun delete-char-before-point ()
+(defun delete-forward-char ()
+  "delete character after point"
+  (let* ((buffer (current-buffer))
+         (cursor (cursor buffer))
+         (line (line cursor))
+         (col (col cursor)))
+    (unless (and (= line (length (contents buffer)))
+                 (> col (length (nth-line line))))
+      (if (> col (length (nth-line line)))
+          (progn
+            (nth-line line :line (concat (nth-line line)
+                                         (nth-line (1+ line))))
+            (remove-line (1+ line)))
+          (nth-line line :line (delete-char (- col 1) (nth-line line)))))))
+
+(defun delete-backward-char ()
+  "delete character before point"
   (let ((buffer (current-buffer)))
     (if (= (col (cursor buffer)) 1)
         (delete-line-at-point)
@@ -30,9 +46,7 @@
       ;; add the contents of the line about to be deleted to the line above
       (insert-at-point (nth-line line))
       ;; remove line from screen, objects and buffer contents
-      (remove-line line)
-      ;; track the change
-      (add-changed-line (1- line)))))
+      (remove-line line))))
 
 (defun add-new-line-at-point ()
   (let* ((buffer (current-buffer))

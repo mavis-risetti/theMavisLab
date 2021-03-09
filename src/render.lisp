@@ -4,6 +4,7 @@
   "render the screen selectively"
   (let* ((buffer (current-buffer))
          (changes (sort (copy-seq (changed-lines buffer)) #'<)))
+    (print changes)
     (mapcar (lambda (n)
               (if (> n (length (line-objects buffer)))
                   (setf (line-objects buffer)

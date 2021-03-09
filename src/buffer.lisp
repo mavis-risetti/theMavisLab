@@ -53,7 +53,7 @@
     ;; remove from the screen first
     (remove-from-dom (nth-object line))
     ;; remove from the line-objects now
-    (delete-item (1- line) (line-objects buffer))
+    (setf (line-objects buffer) (delete-item (1- line) (line-objects buffer)))
     ;; remove from buffer contents
     (setf (contents buffer) (delete-item (1- line) (contents buffer)))))
 

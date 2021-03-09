@@ -10,10 +10,11 @@
   :components ((:file "src/package")
                (:file "src/utils")
                (:file "src/cursor")
-               (:file "src/commands")
-               (:file "src/keymap")
+
                (:file "src/keys")
                (:file "src/render")
                (:file "src/buffer")
+               (:file "src/commands")               
                (:file "src/file")
+               (:file "src/keymap")
                (:file "src/editor")))

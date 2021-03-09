@@ -1,4 +1,4 @@
-(in-package :the-mavis-lab)
+(in-package :cami)
 
 (defclass buffer ()
   ((contents

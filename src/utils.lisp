@@ -1,5 +1,5 @@
 ;; utilities
-(in-package :the-mavis-lab)
+(in-package :cami)
 
 (defun last1 (list)
   (car (last list)))

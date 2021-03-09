@@ -1,4 +1,4 @@
-(in-package :the-mavis-lab)
+(in-package :cami)
 
 (defun insert-at-point (s)
   (let* ((cursor (cursor (current-buffer)))

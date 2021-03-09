@@ -1,4 +1,4 @@
-(in-package :the-mavis-lab)
+(in-package :cami)
 
 (defparameter *body* nil)
 (defparameter *char-width* nil)

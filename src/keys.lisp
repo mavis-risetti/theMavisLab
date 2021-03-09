@@ -1,4 +1,4 @@
-(in-package :the-mavis-lab)
+(in-package :cami)
 
 (defparameter *lower-case-characters*
   '("a" "b" "c" "d" "e" "f" "g" "h" "i"

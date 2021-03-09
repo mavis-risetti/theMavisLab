@@ -1,9 +1,9 @@
-;;;; the-mavis-lab.asd
+;;;; cami.asd
 (in-package :cl-user)
 
-(asdf:defsystem :the-mavis-lab
+(asdf:defsystem :cami
   :version "0.1"
-  :description "A Home for my Experiments"
+  :description "A Home to my Experiments"
   :author "mavis-risetti"
   :depends-on (:clog :str)
   :serial t

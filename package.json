@@ -1,12 +1,12 @@
 {
-  "name": "the-mavis-lab",
+  "name": "cami",
   "version": "0.1.0",
   "description": "A Home To Mavis's Experiments...",
   "main": "./app/main.js",
   "scripts": {
     "start": "electron ."
   },
-  "repository": "https://github.com/mavis-risetti/theMavisLab.git",
+  "repository": "https://github.com/mavis-risetti/cami.git",
   "keywords": [
     "emacs",
     "common-lisp",

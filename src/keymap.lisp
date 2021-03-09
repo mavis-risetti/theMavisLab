@@ -17,3 +17,9 @@
 (set-key "backspace" #'delete-char-before-point)
 (set-key "C-e" #'cursor->eol)
 (set-key "C-a" #'cursor->bol)
+(set-key "C-n" #'cursor->down)
+(set-key "C-p" #'cursor->up)
+(set-key "C-f" #'cursor->right)
+(set-key "C-b" #'cursor->left)
+;;; temporary
+(set-key "C-;" #'find-file)

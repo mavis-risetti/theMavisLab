@@ -78,9 +78,7 @@
                                           (line-objects buffer))))
   ;; adjust cursor
   (cursor->down)
-  (cursor->bol)
-  ;; track change
-  (add-changed-line line))
+  (cursor->bol))
 
 (defun get-buffer-length ()
   (length (contents (current-buffer))))

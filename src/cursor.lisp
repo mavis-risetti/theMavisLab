@@ -19,7 +19,7 @@
   (let ((cursor-el (create-div parent-el :class "cursor"))
         (cursor (make-instance 'cursor)))
     (setf (style cursor-el "width") "1px")
-    (setf (style cursor-el "height") "1em")
+    (setf (style cursor-el "height") "15px")
     (setf (style cursor-el "background") "black")
     (setf (style cursor-el "position") "absolute")
     (setf (style cursor-el "z-index") "10")
@@ -33,7 +33,7 @@
          (p (clip-pos line col)))
     (setf line (first p)
           col (second p))
-    (setf (style (el cursor) "top") (format nil "~Apx" (* *line-height* line))
+    (setf (style (el cursor) "top") (format nil "~Apx" (* 15 line))
           (style (el cursor) "left") (format nil "~Apx" (* *char-width* col)))
     (set-cursor line col)))
 

@@ -57,7 +57,9 @@
             (equal key "Alt"))
         (format nil "~A" (concat s key))
         (format nil "~A~A~A~A~A"
-                alt ctrl shift meta (no-case key)))))
+                alt ctrl shift meta (if (alphanump key)
+                                        (no-case key)
+                                        key)))))
 
 (defun key-handler (event-data)
   (let* ((key (getf event-data :key))
@@ -67,4 +69,4 @@
       (funcall it)
       (if (and (= len 1) (char-p seq))
           (insert-at-point key)
-          (format t "Unrecognized Key Sequence~%")))))
+          (format t "~%Unrecognized Key Sequence: ~A~%" seq)))))

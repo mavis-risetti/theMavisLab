@@ -15,4 +15,5 @@
                (:file "src/keys")
                (:file "src/render")
                (:file "src/buffer")
+               (:file "src/file")
                (:file "src/editor")))

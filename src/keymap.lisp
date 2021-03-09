@@ -18,6 +18,7 @@
 (set-key "C-a" #'cursor->bol)
 (set-key "C-e" #'cursor->eol)
 (set-key "C-d" #'delete-forward-char)
+(set-key "C-k" #'kill-line)
 (set-key "C-n" #'cursor->down)
 (set-key "C-p" #'cursor->up)
 (set-key "C-f" #'cursor->right)

@@ -35,6 +35,14 @@
           (nth-line line :line l)
           (cursor->left)))))
 
+(defun kill-line ()
+  "emacs C-k"
+  (let* ((buffer (current-buffer))
+         (cursor (cursor buffer))
+         (line (line cursor))
+         (col (col cursor)))
+    (nth-line line :line (subseq (nth-line line) 0 (1- col)))))
+
 (defun delete-line-at-point ()
   (let* ((buffer (current-buffer))
          (cursor (cursor buffer))

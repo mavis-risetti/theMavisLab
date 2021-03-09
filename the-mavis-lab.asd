@@ -9,8 +9,10 @@
   :serial t
   :components ((:file "src/package")
                (:file "src/utils")
+               (:file "src/cursor")
+               (:file "src/commands")
+               (:file "src/keymap")
                (:file "src/keys")
                (:file "src/render")
-               (:file "src/cursor")
                (:file "src/buffer")
                (:file "src/editor")))

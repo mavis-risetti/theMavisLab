@@ -5,6 +5,7 @@
 (defparameter *line-height* nil)
 (defparameter *buf* nil)
 (defparameter *ed* nil)
+(defparameter *key-buf* nil)
 
 (defun get-line-height (el)
   "line' on screen height"
@@ -37,7 +38,7 @@
 
 (defun init-editor (body)
   "initialize the editor"
-  (load-css (html-document body) "/lab.css")
+  (load-css (html-document body) "/labs.css")
   (setf *body* body)
   (let* ((editor-div (create-div body :class "editor"))
          (editor-pre (create-child editor-div "<pre></pre>" ))
@@ -45,18 +46,14 @@
     (setf *buf* buf)
     (setf *ed* editor-pre)
     (setf *line-height* (get-line-height editor-pre))    
-    (sleep 1)
     (setf *char-width* (get-char-width editor-pre))
-    ;; let the cursor blink
-    (setf (style (el (cursor buf)) "animation")
-          "blink-animation 1s steps(5, start) infinite")
     (set-on-key-down (html-document body)
                      #'(lambda (obj event-data)
                          (declare (ignore obj))
-                         (key-handler event-data buf)
-                         (render editor-pre buf)))
-    (render editor-pre buf)
-    (render-cursor buf)
+                         (key-handler event-data)
+                         (render editor-pre)))
+    (render editor-pre)
+    (render-cursor)
     ;; To keep the thread running
     (run body)))
 

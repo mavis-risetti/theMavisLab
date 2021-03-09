@@ -1,16 +1,17 @@
 (in-package :the-mavis-lab)
 
-(defun render (editor buffer)
+(defun render (editor)
   "render the screen selectively"
-  (mapcar (lambda (n)
-            (if (> n (length (line-objects buffer)))
-                (push (create-div editor
-                                  :content (nth-line n buffer)
-                                  :class "line")
-                      (line-objects buffer))
-                (nth-object n buffer :html (nth-line n buffer))))
-          (changed-lines buffer))
-  (empty-changed-lines buffer))
+  (let ((buffer (current-buffer)))
+    (mapcar (lambda (n)
+              (if (> n (length (line-objects buffer)))
+                  (push (create-div editor
+                                    :content (nth-line n)
+                                    :class "line")
+                        (line-objects buffer))
+                  (nth-object n :html (nth-line n))))
+            (changed-lines buffer))
+    (empty-changed-lines)))
 
 ;; (defun render (editor buffer)
   ;; "render the screen"

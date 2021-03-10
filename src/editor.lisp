@@ -51,7 +51,8 @@
                      #'(lambda (obj event-data)
                          (declare (ignore obj))
                          (key-handler event-data)
-                         (render editor-pre)))
+                         (render editor-pre))
+                     :disable-default t)
     (render editor-pre)
     (render-cursor)
     ;; To keep the thread running
@@ -61,6 +62,6 @@
   "start the editor"
   ;; Make 'init-editor' entry point for the application
   (initialize #'init-editor)
-  (uiop:launch-program "cd ~/common-lisp/theMavisLab;npm start"))
+  (uiop:launch-program "cd ~/common-lisp/cami;npm start"))
 
 (start-lab)

@@ -68,3 +68,7 @@
     (nth-line line :line before-cursor)
     ;; create a new line in buffer, objects and screen
     (add-line (1+ line) :line-contents after-cursor)))
+
+(defun refresh-screen ()
+  (let ((loc (location *body*)))
+    (reload loc)))

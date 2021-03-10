@@ -25,3 +25,4 @@
 (set-key "C-b" #'cursor->left)
 ;;; temporary
 (set-key "C-;" #'find-file)
+(set-key "M-e" #'refresh-screen)
